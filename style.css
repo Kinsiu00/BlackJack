@@ -1,0 +1,11 @@
+.deck {
+  width: 10%;
+  height: 10%;
+}
+.carrd {
+  width: 10%;
+  height: 10%;
+}
+body{
+  background-color: grey;
+}
