@@ -68,15 +68,22 @@ card.addEventListener('click', function(){
   cardMake.setAttribute("src", card4.img)
   cardMake.setAttribute("class", "carrd")
   cardMake.setAttribute("data-val", card4.value)
+  cardMake.setAttribute("data-type", card4.type)
 let cardValue = document.querySelectorAll(".carrd")
 let val = 0
+let type = []
 for(let i = 0; i < cardValue.length; i++){
   val += Number(cardValue[i].dataset.val)
+  if(cardValue[i].dataset.type === "face" || "ace"){
+    type.push(cardValue[i].dataset.type)
+  }
 }
 console.log(val)
+console.log(type)
 
-
-
+if (type.includes("face") && type.includes("ace") && cardValue.length === 2){
+  console.log("Blackjack!")
+}
 })
 
 
