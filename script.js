@@ -78,37 +78,22 @@ for(let i = 0; i < cardValue.length; i++){
     type.push(cardValue[i].dataset.type)
   }
 }
+
+
+if (val === 21 && type.includes("ace") && cardValue.length === 2){
+  console.log("Blackjack!")
+}
+else{
+  if(type.includes("ace") && val > 21){
+    val -= 10
+    console.log("exceeded 21, value now " + val)
+  }
+  if(val > 21){
+    console.log("bust")
+  }
+}
+
 console.log(val)
 console.log(type)
 
-if (type.includes("face") && type.includes("ace") && cardValue.length === 2){
-  console.log("Blackjack!")
-}
 })
-
-
-
-
-//game stuff
-
-  let card1 = deck[(Math.floor(Math.random()* 51))].img
-  let card2 = deck[(Math.floor(Math.random()* 51))]
-
-  let value = (card1.value + card2.value)
-   console.log(deck.length)
-
-   function draw2(){
-
-     if(value > 21){
-       console.log("busted!")
-     }
-     else if (value === 21){
-       console.log("Blackjack!")
-     }
-     else if(value < 21){
-       console.log("you got " + value + "!")
-     }
-     return [card1, card2]
-   }
-
-   draw2()
