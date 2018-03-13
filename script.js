@@ -60,13 +60,12 @@ deck = [
 //MAKE A CARD
 let drawMe = document.querySelector(".player")
 drawMe.addEventListener('click', function(){
-
   let cardMake = document.createElement("img")
-  let card = deck[(Math.floor(Math.random()* 52))]
-deck.splice(card, 1)
-  console.log(card)
-    console.log(card)
-  console.log(deck)
+
+  //MAKE MY CARD RANDOM
+  let random = Math.floor(Math.random()* 52)
+  let card = deck[random]
+deck.splice(random, 1)
 
   drawMe.appendChild(cardMake)
   cardMake.setAttribute("src", card.img)
