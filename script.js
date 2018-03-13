@@ -63,10 +63,11 @@ drawMe.addEventListener('click', function(){
   let cardMake = document.createElement("img")
 
   //MAKE MY CARD RANDOM
-  let random = Math.floor(Math.random())
+  let random = Math.floor(Math.random()*deck.length)
   let card = deck[random]
 deck.splice(random, 1)
-random --
+console.log(deck.length)
+console.log(card)
 
 
   drawMe.appendChild(cardMake)
