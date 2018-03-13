@@ -56,19 +56,23 @@ deck = [
  {id: "diamond2", type: "num", value: 2, img: "img/2D.jpg"},]
 
 
-let card = document.querySelector(".draw")
 
 //MAKE A CARD
-card.addEventListener('click', function(){
+let drawMe = document.querySelector(".player")
+drawMe.addEventListener('click', function(){
 
   let cardMake = document.createElement("img")
-  let card4 = deck[(Math.floor(Math.random()* 52))]
+  let card = deck[(Math.floor(Math.random()* 52))]
+deck.splice(card, 1)
+  console.log(card)
+    console.log(card)
+  console.log(deck)
 
-  card.appendChild(cardMake)
-  cardMake.setAttribute("src", card4.img)
+  drawMe.appendChild(cardMake)
+  cardMake.setAttribute("src", card.img)
   cardMake.setAttribute("class", "carrd")
-  cardMake.setAttribute("data-val", card4.value)
-  cardMake.setAttribute("data-type", card4.type)
+  cardMake.setAttribute("data-val", card.value)
+  cardMake.setAttribute("data-type", card.type)
 let cardValue = document.querySelectorAll(".carrd")
 let val = 0
 let type = []
@@ -76,10 +80,11 @@ for(let i = 0; i < cardValue.length; i++){
   val += Number(cardValue[i].dataset.val)
   if(cardValue[i].dataset.type === "face" || "ace"){
     type.push(cardValue[i].dataset.type)
+    //this actually isn't working correctly, still works though.
   }
 }
 
-
+//VALUES
 if (val === 21 && type.includes("ace") && cardValue.length === 2){
   console.log("Blackjack!")
 }
