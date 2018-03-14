@@ -145,13 +145,34 @@ console.log(typeD)
 console.log(dealerVal)
 console.log(typeP)
 console.log(playerVal)
+
+    if (playerVal === 21 && typeP.includes("ace") === true){
+        blackJackP = true;
+    }
+    if (dealerVal === 21 && typeD.includes("ace") === true){
+      blackJackD = true;
+    }
 }
 
+
 //VALUE CALCULATION
-// let calcP = function(){
-// if (val === 21 && type.includes("ace") && cardValue.length === 2){
-//   console.log("Blackjack!")
-// }
+
+//CHECK FOR BLACKJACK
+let jackBlack = function(){
+if (blackJackP === true && blackJackD === true){
+  console.log("both blackjack")
+}
+else if (blackJackP === true && blackJackD === false){
+  console.log("player wins with blackjack")
+}
+else if (blackJackP === false && blackJackD === true){
+  console.log("dealer wins with blackjack")
+}
+}
+
+
+
+//
 // else{
 //     if(type.includes("ace") && val > 21){
 //         val -= 10
@@ -176,6 +197,7 @@ drawMe.addEventListener('click', function(){
   drawDH()
   drawD()
   checkVal()
+  jackBlack()
 })
 
 
