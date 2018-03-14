@@ -63,8 +63,8 @@ let playerVal = 0;
 let dealerVal = 0;
 
 //PLAYER DRAW
+  let drawMe = document.querySelector(".player")
 let drawP = function(){
-
   let cardMake = document.createElement("img")
   //MAKE MY CARD RANDOM
   let random = Math.floor(Math.random()*deck.length)
@@ -76,23 +76,14 @@ console.log(card)
 
   drawMe.appendChild(cardMake)
   cardMake.setAttribute("src", card.img)
-  cardMake.setAttribute("class", "carrd")
+  cardMake.setAttribute("class", "cardP")
   cardMake.setAttribute("data-val", card.value)
   cardMake.setAttribute("data-type", card.type)
-let cardValue = document.querySelectorAll(".carrd")
-let type = []
-for(let i = 0; i < cardValue.length; i++){
-  playerVal += Number(cardValue[i].dataset.val)
-  if(cardValue[i].dataset.type === "face" || "ace"){
-    type.push(cardValue[i].dataset.type)
-    //this actually isn't working correctly, still works though.
-    }
-  }
 }
-
 //DEALER DRAW
-let drawD = function(){
 
+let stayMe = document.querySelector(".dealer")
+let drawD = function(){
   let cardMake = document.createElement("img")
   //MAKE MY CARD RANDOM
   let random = Math.floor(Math.random()*deck.length)
@@ -104,23 +95,13 @@ console.log(card)
 
   stayMe.appendChild(cardMake)
   cardMake.setAttribute("src", card.img)
-  cardMake.setAttribute("class", "carrd")
+  cardMake.setAttribute("class", "cardD")
   cardMake.setAttribute("data-val", card.value)
   cardMake.setAttribute("data-type", card.type)
-let cardValue = document.querySelectorAll(".carrd")
-let type = []
-for(let i = 0; i < cardValue.length; i++){
-  dealerVal += Number(cardValue[i].dataset.val)
-  if(cardValue[i].dataset.type === "face" || "ace"){
-    type.push(cardValue[i].dataset.type)
-    //this actually isn't working correctly, still works though.
-    }
-  }
 }
 
 //DEALER DRAW HIDDEN
 let drawDH = function(){
-
   let cardMake = document.createElement("img")
   //MAKE MY CARD RANDOM
   let random = Math.floor(Math.random()*deck.length)
@@ -132,19 +113,38 @@ console.log(card)
 
   stayMe.appendChild(cardMake)
   cardMake.setAttribute("src", 'img/Gray_back.jpg')
-  cardMake.setAttribute("class", "carrd")
+  cardMake.setAttribute("class", "cardD")
   cardMake.setAttribute("data-val", card.value)
   cardMake.setAttribute("data-type", card.type)
-let cardValue = document.querySelectorAll(".carrd")
-let type = []
-for(let i = 0; i < cardValue.length; i++){
-  console.log(cardValue)
-  dealerVal += Number(cardValue[i].dataset.val)
-  if(cardValue[i].dataset.type === "face" || "ace"){
-    type.push(cardValue[i].dataset.type)
+
     //this actually isn't working correctly, still works though.
     }
+//INIT CALCULATION
+
+let checkVal = function(){
+  let cardValueP = document.querySelectorAll(".cardP")
+  let typeP = []
+  for(let i = 0; i < cardValueP.length; i++){
+    if(cardValueP[i].dataset.type === "face" || "ace"){
+      typeP.push(cardValueP[i].dataset.type)
+      //this actually isn't working correctly, still works though.
+      }
+    playerVal += Number(cardValueP[i].dataset.val)
+
   }
+  let cardValueD = document.querySelectorAll(".cardD")
+  let typeD = []
+  for(let i = 0; i < cardValueD.length; i++){
+    if(cardValueD[i].dataset.type === "face" || "ace"){
+      typeD.push(cardValueD[i].dataset.type)
+      //this actually isn't working correctly, still works though.
+      }
+    dealerVal += Number(cardValueD[i].dataset.val)
+}
+console.log(typeD)
+console.log(dealerVal)
+console.log(typeP)
+console.log(playerVal)
 }
 
 //VALUE CALCULATION
@@ -169,15 +169,13 @@ for(let i = 0; i < cardValue.length; i++){
 // }
 
 //PLAYER PHASE
-let drawMe = document.querySelector(".player")
 
 drawMe.addEventListener('click', function(){
   drawP()
   drawP()
   drawDH()
   drawD()
-  console.log(playerVal)
-  console.log(dealerVal)
+  checkVal()
 })
 
 
@@ -185,4 +183,4 @@ drawMe.addEventListener('click', function(){
 
 
 //STAY PHASE
-let stayMe = document.querySelector(".dealer")
+// let stayMe = document.querySelector(".dealer")
