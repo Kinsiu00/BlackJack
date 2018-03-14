@@ -57,7 +57,8 @@ deck = [
 
 
 
-//MAKE A CARD
+//PLAYER PHASE
+
 let drawMe = document.querySelector(".player")
 drawMe.addEventListener('click', function(){
   let cardMake = document.createElement("img")
@@ -86,21 +87,55 @@ for(let i = 0; i < cardValue.length; i++){
   }
 }
 
-//VALUES
+//VALUE CALCULATION
 if (val === 21 && type.includes("ace") && cardValue.length === 2){
   console.log("Blackjack!")
+  dealerTurn = true;
+  console.log("dealer turn")
 }
 else{
-  if(type.includes("ace") && val > 21){
-    val -= 10
-    console.log("exceeded 21, value now " + val)
-  }
-  if(val > 21){
-    console.log("bust")
+    if(type.includes("ace") && val > 21){
+        val -= 10
+        console.log("exceeded 21, value now " + val)
+    }
+    else if(val > 21){
+        console.log("bust")
+        dealerTurn = true;
+        console.log("dealer turn")
+    }
+
+    }
+})
+
+//STAY PHASE
+let stayMe = document.querySelector(".dealer")
+stayMe.addEventListener('click', function(){
+      console.log("my turn")
+
+      let random = Math.floor(Math.random()*deck.length)
+      let card = deck[random]
+    deck.splice(random, 1)
+    console.log(deck.length)
+    console.log(card)
+
+
+let cardMake = document.createElement("img")
+      stayMe.appendChild(cardMake)
+      cardMake.setAttribute("src", card.img)
+      cardMake.setAttribute("class", "carrd")
+      cardMake.setAttribute("data-val", card.value)
+      cardMake.setAttribute("data-type", card.type)
+    let cardValue = document.querySelectorAll(".carrd")
+    let val = 0
+    let type = []
+    for(let i = 0; i < cardValue.length; i++){
+      val += Number(cardValue[i].dataset.val)
+      if(cardValue[i].dataset.type === "face" || "ace"){
+        type.push(cardValue[i].dataset.type)
   }
 }
+
 
 console.log(val)
 console.log(type)
-
 })
