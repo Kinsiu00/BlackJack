@@ -61,6 +61,8 @@ let blackJackD = false;
 let dealerTurn = false;
 let playerVal = 0;
 let dealerVal = 0;
+let typeP = []
+let typeD = []
 
 //PLAYER DRAW
   let drawMe = document.querySelector(".player")
@@ -123,7 +125,7 @@ console.log(card)
 
 let checkVal = function(){
   let cardValueP = document.querySelectorAll(".cardP")
-  let typeP = []
+  // let typeP = []
   for(let i = 0; i < cardValueP.length; i++){
     if(cardValueP[i].dataset.type === "face" || "ace"){
       typeP.push(cardValueP[i].dataset.type)
@@ -133,7 +135,7 @@ let checkVal = function(){
 
   }
   let cardValueD = document.querySelectorAll(".cardD")
-  let typeD = []
+  // let typeD = []
   for(let i = 0; i < cardValueD.length; i++){
     if(cardValueD[i].dataset.type === "face" || "ace"){
       typeD.push(cardValueD[i].dataset.type)
@@ -168,12 +170,25 @@ else if (blackJackP === true && blackJackD === false){
 else if (blackJackP === false && blackJackD === true){
   console.log("dealer wins with blackjack")
 }
+else{
+  console.log("no blackjack, continue")
+}
+}
+
+let valCalc = function(){
+  console.log(typeP)
+  console.log(player)
+if(typeP.includes("ace") && playerVal > 21){
+   playerVal -= 10
+   console.log("exceeded 21, value set to "+ playerVal)
+}
+if(playerVal > 21){
+  console.log("busted")
+  }
 }
 
 
-
 //
-// else{
 //     if(type.includes("ace") && val > 21){
 //         val -= 10
 //         console.log("exceeded 21, value now " + val)
@@ -190,14 +205,19 @@ else if (blackJackP === false && blackJackD === true){
 // }
 
 //PLAYER PHASE
-
-drawMe.addEventListener('click', function(){
+let drawBtn = document.querySelector(".draw")
+drawBtn.addEventListener('click', function(){
   drawP()
   drawP()
   drawDH()
   drawD()
   checkVal()
   jackBlack()
+})
+let hitBtn = document.querySelector(".hit")
+hitBtn.addEventListener('click', function(){
+drawP()
+valCalc()
 })
 
 
