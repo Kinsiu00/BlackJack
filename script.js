@@ -94,7 +94,6 @@ deck.splice(random, 1)
 console.log(deck.length)
 console.log(card)
 
-
   stayMe.appendChild(cardMake)
   cardMake.setAttribute("src", card.img)
   cardMake.setAttribute("class", "cardD")
@@ -112,15 +111,26 @@ deck.splice(random, 1)
 console.log(deck.length)
 console.log(card)
 
-
   stayMe.appendChild(cardMake)
-  cardMake.setAttribute("src", 'img/Gray_back.jpg')
-  cardMake.setAttribute("class", "cardD")
+  cardMake.setAttribute("src", card.img)
+  cardMake.setAttribute("class", "cardD hide")
   cardMake.setAttribute("data-val", card.value)
   cardMake.setAttribute("data-type", card.type)
 
+
+}
+  //DEALER DRAW HIDDEN PLACEHOLDER
+  let drawDHP = function(){
+    let cardMake = document.createElement("img")
+
+    stayMe.appendChild(cardMake)
+    cardMake.setAttribute("src", 'img/Gray_back.jpg')
+    cardMake.setAttribute("class", "cardD")
+    cardMake.setAttribute("data-val", 0)
+    cardMake.setAttribute("data-type", "num")
+}
     //this actually isn't working correctly, still works though.
-    }
+
 //INIT CALCULATION
 
 let checkVal = function(){
@@ -161,14 +171,26 @@ console.log(playerVal)
 
 //CHECK FOR BLACKJACK
 let jackBlack = function(){
+  let revealCard = document.querySelector('img:nth-child(2)')
+  let hiddenCard = document.querySelector('img:nth-child(3)')
+  console.log(revealCard)
+  console.log(hiddenCard)
+
+
 if (blackJackP === true && blackJackD === true){
   console.log("both blackjack")
+revealCard.setAttribute("class", "cardD")
+hiddenCard.setAttribute("class", "cardD hide")
 }
 else if (blackJackP === true && blackJackD === false){
   console.log("player wins with blackjack")
+  revealCard.setAttribute("class", "cardD")
+  hiddenCard.setAttribute("class", "cardD hide")
 }
 else if (blackJackP === false && blackJackD === true){
   console.log("dealer wins with blackjack")
+  revealCard.setAttribute("class", "cardD")
+  hiddenCard.setAttribute("class", "cardD hide")
 }
 else{
   console.log("no blackjack, continue")
@@ -176,28 +198,21 @@ else{
 }
 
 let valCalc = function(){
-  console.log(typeP)
-  console.log(player)
-if(typeP.includes("ace") && playerVal > 21){
-   playerVal -= 10
-   console.log("exceeded 21, value set to "+ playerVal)
-}
-if(playerVal > 21){
-  console.log("busted")
+drawP()
+let cardValueP = document.querySelectorAll(".cardP")
+playerVal = 0;
+  for(let i = 0; i < cardValueP.length; i++){
+  playerVal += Number(cardValueP[i].dataset.val)
+  console.log(playerVal)
   }
-}
-
-
-//
-//     if(type.includes("ace") && val > 21){
-//         val -= 10
-//         console.log("exceeded 21, value now " + val)
-//     }
-//     else if(val > 21){
-//         console.log("bust")
-//         dealerTurn = true;
-//         console.log("dealer turn")
-//     }
+      if(typeP.includes("ace") && playerVal > 21){
+          playerVal -= 10
+          console.log("exceeded 21, value now " + playerVal)
+      }
+      else if(playerVal > 21){
+          console.log("bust")
+      }
+  }
 //
 //     console.log(val)
 //     console.log(type)
@@ -210,13 +225,13 @@ drawBtn.addEventListener('click', function(){
   drawP()
   drawP()
   drawDH()
+  drawDHP()
   drawD()
   checkVal()
   jackBlack()
 })
 let hitBtn = document.querySelector(".hit")
 hitBtn.addEventListener('click', function(){
-drawP()
 valCalc()
 })
 
