@@ -3,14 +3,23 @@
   height: 10%;
 }
 .cardP {
-  width: 10%;
-  height: 10%;
+  width: 12%;
+  height: 12%;
 }
 
 .cardD{
-  width:10%;
-  height: 10%;
+  width: 12%;
+  height: 12%;
 }
 body{
-  background-color: grey;
+  background-color: #2e7d32;
+  color: white;
+  font-family: georgia;
+}
+
+.hideme{
+  visibility:hidden
+}
+img{
+  padding: 1px;
 }

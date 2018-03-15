@@ -12,21 +12,32 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 
-    <body>
-      <h1>testing</h1>
+    <body class="container">
 
-      <div class="container dealer">
-        <img src="img/Gray_back.jpg" class="col s2 deck"> Dealer</img>
-
-      </div>
-      <div class="container player">
-        <img src="img/Gray_back.jpg" class="col s2 deck"> Player</img>
+      <div class="row">
+        <h3 class="col s8 offset-s3">Mostly Blackjack</h1>
       </div>
 
-      <div>
-        <a class="btn draw">draw</a>
-        <a class="btn hit">hit</a>
-        <a class="btn stay">stay</a>
+      <div class="container row dealer">
+        <img src="img/dealer.png" class="col s4 offset-s2 deck" id="dealerScore">Dealer</img>
+      </div>
+
+      <div class="container row">
+        <h4 class="col 4 offset-s4 message">Welcome to Blackjack!</h4>
+      </div>
+
+
+      <div class="container row player">
+        <img src="img/Gray_back.jpg" class="hideme col s2 offset-s4 deck" id="playerScore">Player</img>
+      </div>
+
+      <div class="row">
+        <div class= "col 8 offset-s3">
+          <a class="btn draw">draw</a>
+          <a class="btn hit hide">hit</a>
+          <a class="btn stay hide">stay</a>
+          <a class="btn refresh">refresh</a>
+        </div>
       </div
 
 

@@ -63,6 +63,8 @@ let playerVal = 0;
 let dealerVal = 0;
 let typeP = []
 let typeD = []
+let message = document.querySelector(".message")
+
 
 //PLAYER DRAW
   let drawMe = document.querySelector(".player")
@@ -124,7 +126,7 @@ deck.splice(random, 1)
     let cardMake = document.createElement("img")
 
     stayMe.appendChild(cardMake)
-    cardMake.setAttribute("src", 'img/Gray_back.jpg')
+    cardMake.setAttribute("src", 'img/Red_back.jpg')
     cardMake.setAttribute("class", "cardD")
     cardMake.setAttribute("data-val", 0)
     cardMake.setAttribute("data-type", "num")
@@ -178,31 +180,35 @@ let jackBlack = function(){
 
 
 if (blackJackP === true && blackJackD === true){
-  console.log("both blackjack")
+  message.innerHTML = "Double Blackjack?!"
 revealCard.setAttribute("class", "cardD")
 hiddenCard.setAttribute("class", "cardD hide")
 }
 else if (blackJackP === true && blackJackD === false){
-  console.log("player wins with blackjack")
+  message.innerHTML = "player has Blackjack!"
   revealCard.setAttribute("class", "cardD")
   hiddenCard.setAttribute("class", "cardD hide")
 }
 else if (blackJackP === false && blackJackD === true){
-  console.log("dealer wins with blackjack")
+  message.innerHTML = "Dealer has Blackjack!"
   revealCard.setAttribute("class", "cardD")
   hiddenCard.setAttribute("class", "cardD hide")
 }
 else{
-  console.log("no blackjack, continue")
+  // console.log("no blackjack, continue")
+  message.innerHTML = "Dealer must hit on 16."
 }
 }
 
-// //REMOVE DRAW BUTTON
-// function ridDraw(){
-//   let targetbtn = document.querySelectorAll("btn")
-// if
-//   targetbtn.setAttribute("class", ".draw hide")
-// }
+//REMOVE DRAW BUTTON
+function ridDraw(){
+  let targetDraw = document.querySelector(".draw")
+  let targetHit = document.querySelector(".hit")
+  let targetStay = document.querySelector(".stay")
+  targetHit.setAttribute("class", ".draw btn")
+  targetDraw.setAttribute("class", ".draw btn hide")
+  targetStay.setAttribute("class", ".draw btn")
+}
 
 let valCalcP = function(){
 drawP()
@@ -221,7 +227,7 @@ playerVal = 0;
           console.log("exceeded 21, value now " + playerVal)
         }
       else if(playerVal > 21){
-          console.log("Player Busted")
+          message.innerHTML = "Player Busted!"
       }
   }
 
@@ -233,17 +239,15 @@ playerVal = 0;
     }
         if(typeD.includes("ace", "ace") && dealerVal > 21){
             dealerVal -= 10
-            console.log("Dealer exceeded 21, value now " + dealerVal)
             valCalcD()
         }
 
         if(typeD.includes("ace") && dealerVal > 21){
             dealerVal -= 10
-            console.log("Dealer exceeded 21, value now " + dealerVal)
             valCalcD()
           }
         if(dealerVal >21){
-          console.log("Dealer Busts, Player Wins")
+          message.innerHTML = "Dealer Busted"
         }
         else{
           if(dealerVal < 17){
@@ -252,13 +256,13 @@ playerVal = 0;
           }
           else{
             if(playerVal > dealerVal){
-              console.log("Player Wins")
+              message.innerHTML = "Player Wins"
             }
             else if(playerVal < dealerVal){
-              console.log("Dealer Wins")
+              message.innerHTML = "Dealer Wins"
             }
             else{
-              console.log("Tied, try again")
+              message.innerHTML = "Score Tied!"
             }
           }
         }
@@ -274,7 +278,7 @@ drawBtn.addEventListener('click', function(){
   drawD()
   checkVal()
   jackBlack()
-  // ridDraw()
+  ridDraw()
   console.log(dealerVal)
   console.log(playerVal)
 })
@@ -294,4 +298,9 @@ stayBtn.addEventListener('click', function(){
     let hiddenCard = document.querySelector('img:nth-child(3)')
     revealCard.setAttribute("class", "cardD")
     hiddenCard.setAttribute("class", "cardD hide")
+})
+
+let refreshBtn = document.querySelector(".refresh")
+refreshBtn.addEventListener('click', function(){
+  document.location.reload()
 })
