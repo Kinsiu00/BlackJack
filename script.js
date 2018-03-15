@@ -204,7 +204,7 @@ else{
 //   targetbtn.setAttribute("class", ".draw hide")
 // }
 
-let valCalc = function(){
+let valCalcP = function(){
 drawP()
 let cardValueP = document.querySelectorAll(".cardP")
 playerVal = 0;
@@ -221,9 +221,48 @@ playerVal = 0;
           console.log("exceeded 21, value now " + playerVal)
         }
       else if(playerVal > 21){
-          console.log("bust")
+          console.log("Player Busted")
       }
   }
+
+  let valCalcD = function(){
+  let cardValueD = document.querySelectorAll(".cardD")
+  dealerVal = 0;
+    for(let i = 0; i < cardValueD.length; i++){
+    dealerVal += Number(cardValueD[i].dataset.val)
+    }
+        if(typeD.includes("ace", "ace") && dealerVal > 21){
+            dealerVal -= 10
+            console.log("Dealer exceeded 21, value now " + dealerVal)
+            valCalcD()
+        }
+
+        if(typeD.includes("ace") && dealerVal > 21){
+            dealerVal -= 10
+            console.log("Dealer exceeded 21, value now " + dealerVal)
+            valCalcD()
+          }
+        if(dealerVal >21){
+          console.log("Dealer Busts, Player Wins")
+        }
+        else{
+          if(dealerVal < 17){
+            drawD()
+            valCalcD()
+          }
+          else{
+            if(playerVal > dealerVal){
+              console.log("Player Wins")
+            }
+            else if(playerVal < dealerVal){
+              console.log("Dealer Wins")
+            }
+            else{
+              console.log("Tied, try again")
+            }
+          }
+        }
+    }
 
 //PLAYER PHASE
 let drawBtn = document.querySelector(".draw")
@@ -236,17 +275,23 @@ drawBtn.addEventListener('click', function(){
   checkVal()
   jackBlack()
   // ridDraw()
+  console.log(dealerVal)
   console.log(playerVal)
 })
 let hitBtn = document.querySelector(".hit")
 hitBtn.addEventListener('click', function(){
-valCalc()
+valCalcP()
 console.log(playerVal)
 })
 
 
+let stayBtn = document.querySelector(".stay")
+stayBtn.addEventListener('click', function(){
+  valCalcD()
+  console.log(dealerVal)
 
-
-
-//STAY PHASE
-// let stayMe = document.querySelector(".dealer")
+    let revealCard = document.querySelector('img:nth-child(2)')
+    let hiddenCard = document.querySelector('img:nth-child(3)')
+    revealCard.setAttribute("class", "cardD")
+    hiddenCard.setAttribute("class", "cardD hide")
+})
