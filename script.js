@@ -72,8 +72,8 @@ let drawP = function(){
   let random = Math.floor(Math.random()*deck.length)
   let card = deck[random]
 deck.splice(random, 1)
-console.log(deck.length)
-console.log(card)
+// console.log(deck.length)
+// console.log(card)
 
 
   drawMe.appendChild(cardMake)
@@ -91,8 +91,8 @@ let drawD = function(){
   let random = Math.floor(Math.random()*deck.length)
   let card = deck[random]
 deck.splice(random, 1)
-console.log(deck.length)
-console.log(card)
+// console.log(deck.length)
+// console.log(card)
 
   stayMe.appendChild(cardMake)
   cardMake.setAttribute("src", card.img)
@@ -108,8 +108,8 @@ let drawDH = function(){
   let random = Math.floor(Math.random()*deck.length)
   let card = deck[random]
 deck.splice(random, 1)
-console.log(deck.length)
-console.log(card)
+// console.log(deck.length)
+// console.log(card)
 
   stayMe.appendChild(cardMake)
   cardMake.setAttribute("src", card.img)
@@ -153,10 +153,10 @@ let checkVal = function(){
       }
     dealerVal += Number(cardValueD[i].dataset.val)
 }
-console.log(typeD)
-console.log(dealerVal)
-console.log(typeP)
-console.log(playerVal)
+// console.log(typeD)
+// console.log(dealerVal)
+// console.log(typeP)
+// console.log(playerVal)
 
     if (playerVal === 21 && typeP.includes("ace") === true){
         blackJackP = true;
@@ -173,8 +173,8 @@ console.log(playerVal)
 let jackBlack = function(){
   let revealCard = document.querySelector('img:nth-child(2)')
   let hiddenCard = document.querySelector('img:nth-child(3)')
-  console.log(revealCard)
-  console.log(hiddenCard)
+  // console.log(revealCard)
+  // console.log(hiddenCard)
 
 
 if (blackJackP === true && blackJackD === true){
@@ -197,27 +197,33 @@ else{
 }
 }
 
+// //REMOVE DRAW BUTTON
+// function ridDraw(){
+//   let targetbtn = document.querySelectorAll("btn")
+// if
+//   targetbtn.setAttribute("class", ".draw hide")
+// }
+
 let valCalc = function(){
 drawP()
 let cardValueP = document.querySelectorAll(".cardP")
 playerVal = 0;
   for(let i = 0; i < cardValueP.length; i++){
   playerVal += Number(cardValueP[i].dataset.val)
-  console.log(playerVal)
   }
       if(typeP.includes("ace") && playerVal > 21){
           playerVal -= 10
           console.log("exceeded 21, value now " + playerVal)
       }
+
+      if(typeP.includes("ace", "ace") && playerVal > 21){
+          playerVal -= 10
+          console.log("exceeded 21, value now " + playerVal)
+        }
       else if(playerVal > 21){
           console.log("bust")
       }
   }
-//
-//     console.log(val)
-//     console.log(type)
-//     }
-// }
 
 //PLAYER PHASE
 let drawBtn = document.querySelector(".draw")
@@ -229,10 +235,13 @@ drawBtn.addEventListener('click', function(){
   drawD()
   checkVal()
   jackBlack()
+  // ridDraw()
+  console.log(playerVal)
 })
 let hitBtn = document.querySelector(".hit")
 hitBtn.addEventListener('click', function(){
 valCalc()
+console.log(playerVal)
 })
 
 
