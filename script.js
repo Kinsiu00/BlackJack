@@ -65,7 +65,6 @@ let typeP = []
 let typeD = []
 let message = document.querySelector(".message")
 
-
 //PLAYER DRAW
   let drawMe = document.querySelector(".player")
 let drawP = function(){
@@ -74,9 +73,6 @@ let drawP = function(){
   let random = Math.floor(Math.random()*deck.length)
   let card = deck[random]
 deck.splice(random, 1)
-// console.log(deck.length)
-// console.log(card)
-
 
   drawMe.appendChild(cardMake)
   cardMake.setAttribute("src", card.img)
@@ -84,17 +80,16 @@ deck.splice(random, 1)
   cardMake.setAttribute("data-val", card.value)
   cardMake.setAttribute("data-type", card.type)
 }
-//DEALER DRAW
 
+//DEALER DRAW
 let stayMe = document.querySelector(".dealer")
 let drawD = function(){
   let cardMake = document.createElement("img")
+
   //MAKE MY CARD RANDOM
   let random = Math.floor(Math.random()*deck.length)
   let card = deck[random]
 deck.splice(random, 1)
-// console.log(deck.length)
-// console.log(card)
 
   stayMe.appendChild(cardMake)
   cardMake.setAttribute("src", card.img)
@@ -110,17 +105,14 @@ let drawDH = function(){
   let random = Math.floor(Math.random()*deck.length)
   let card = deck[random]
 deck.splice(random, 1)
-// console.log(deck.length)
-// console.log(card)
 
   stayMe.appendChild(cardMake)
   cardMake.setAttribute("src", card.img)
   cardMake.setAttribute("class", "cardD hide")
   cardMake.setAttribute("data-val", card.value)
   cardMake.setAttribute("data-type", card.type)
-
-
 }
+
   //DEALER DRAW HIDDEN PLACEHOLDER
   let drawDHP = function(){
     let cardMake = document.createElement("img")
@@ -131,10 +123,8 @@ deck.splice(random, 1)
     cardMake.setAttribute("data-val", 0)
     cardMake.setAttribute("data-type", "num")
 }
-    //this actually isn't working correctly, still works though.
 
 //INIT CALCULATION
-
 let checkVal = function(){
   let cardValueP = document.querySelectorAll(".cardP")
   // let typeP = []
@@ -155,11 +145,6 @@ let checkVal = function(){
       }
     dealerVal += Number(cardValueD[i].dataset.val)
 }
-// console.log(typeD)
-// console.log(dealerVal)
-// console.log(typeP)
-// console.log(playerVal)
-
     if (playerVal === 21 && typeP.includes("ace") === true){
         blackJackP = true;
     }
@@ -168,16 +153,10 @@ let checkVal = function(){
     }
 }
 
-
-//VALUE CALCULATION
-
 //CHECK FOR BLACKJACK
 let jackBlack = function(){
   let revealCard = document.querySelector('img:nth-child(2)')
   let hiddenCard = document.querySelector('img:nth-child(3)')
-  // console.log(revealCard)
-  // console.log(hiddenCard)
-
 
 if (blackJackP === true && blackJackD === true){
   message.innerHTML = "Double Blackjack?!"
@@ -195,7 +174,6 @@ else if (blackJackP === false && blackJackD === true){
   hiddenCard.setAttribute("class", "cardD hide")
 }
 else{
-  // console.log("no blackjack, continue")
   message.innerHTML = "Dealer must hit on 16."
 }
 }
@@ -241,7 +219,6 @@ playerVal = 0;
             dealerVal -= 10
             valCalcD()
         }
-
         if(typeD.includes("ace") && dealerVal > 21){
             dealerVal -= 10
             valCalcD()
@@ -287,7 +264,6 @@ hitBtn.addEventListener('click', function(){
 valCalcP()
 console.log(playerVal)
 })
-
 
 let stayBtn = document.querySelector(".stay")
 stayBtn.addEventListener('click', function(){
